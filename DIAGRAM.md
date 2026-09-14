@@ -1,129 +1,108 @@
-# Diagrama de clases
-
-Completa a continuación tu diagrama de clases usando
-[Mermaid](https://mermaid.live/edit). Debes completar el diagrama agregando las
-clases y sus atributos, operaciones y relaciones faltantes. La ventaja de usar
-**Mermaid** es que el diagrama es simplemente texto en un archivo
-[Markdown](https://www.markdownguide.org) como este, y no gráficos ni imágenes.
-
 ```mermaid
+
 classDiagram
-    %% Relaciones de Wizard
-    Wizard "1" --> "1" SpellsBook : has
-    Wizard "1" --> "1" Staff : has
+    class Character {
+        +string Name
+        +int AttackValue
+        +int DefenseValue
+        +int Health
+        +Character(type, name, health, attackvalue, defensevalue)
+        +ReceiveAttack(int power)
+        +Cure(int points)
+        +Attack(string name)
+        +GetAttackValue()
+        +GetDefenseValue()
+    }
 
-    %% Relaciones de Dwarf
-    Dwarf "1" --> "1" Axe : has
-    Dwarf "1" --> "1" Shield : has
-    Dwarf "1" --> "1" Helmet : has
+    class Wizard {
+        +SpellsBook SpellsBook
+        +Staff Staff
+        +SetItem(Item Item)
+        +DropItem(Item Item)
+    }
 
-    %% Relaciones de Knight
-    Knight "1" --> "1" Sword : has
-    Knight "1" --> "1" Shield : has
-    Knight "1" --> "1" Armor : has
+    class Dwarf {
+        +Axe Axe
+        +Shield Shield
+        +Helmet Helmet
+        +Bow Bow
+        +SetItem(Item Item)
+        +DropItem(Item Item)
+    }
 
-    %% Relaciones de Archer
-    Archer "1" --> "1" Bow : has
-    Archer "1" --> "1" Helmet : has
+    class Elve {
+        +Sword Sword
+        +Bow Bow
+        +Armor Armor
+        +Helmet Helmet
+        +SetItem(Item Item)
+        +DropItem(Item Item)
+    }
 
-    %% Relación de SpellsBook con Spell
+    class SpellsBook {
+        ICollection~Spell~ Spell
+        +AddSpell(Spell spell)
+    }
+
+    class Staff {
+    }
+
+    class Spell {
+    }
+
+    class Axe {
+    }
+
+    class Shield {
+    }
+
+    class Helmet {
+    }
+
+    class Bow {
+    }
+
+    class Sword {
+    }
+
+    class Armor {
+    }
+
+    class Item {
+        +string Name
+        +int AttackValue
+        +int DefenseValue
+        +Item(type, name, attackvalue, defensevalue)
+    }
+
+    %% Herencia (Generalización)
+    Character <|-- Wizard : es
+    Character <|-- Dwarf : es
+    Character <|-- Elve : es
+
+    Axe --|> Item : es
+    Shield --|> Item : es
+    Helmet --|> Item : es
+    Bow --|> Item : es
+    Sword --|> Item : es
+    Armor --|> Item : es
+    Staff --|> Item : es
+    SpellsBook --|> Item : es
+    Spell --|> Item : es
+
+    %% Asociaciones / Composiciones de Equipamiento
+    Wizard --> SpellsBook
+    Wizard --> Staff
+
+    Dwarf --> Axe : tiene
+    Dwarf --> Shield : tiene
+    Dwarf --> Helmet : tiene
+    Dwarf --> Bow : tiene
+
+    Elve --> Sword :tiene
+    Elve --> Bow : tiene
+    Elve --> Armor : tiene
+    Elve --> Helmet : tiene
+
+    %% Relación entre SpellsBook y Spell
     SpellsBook "1" --> "*" Spell : contiene
-
-    %% Clase Wizard
-    class Wizard{
-      +string Name
-      +SpellsBook SpellsBook
-      +Staff Staff
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Wizard(string name)
-      +ReceiveAttack(int power)
-      +Cure()
-    }
-
-    %% Clase Dwarf
-    class Dwarf{
-      +string Name
-      +Axe Axe
-      +Shield Shield
-      +Helmet Helmet
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Dwarf(string name)
-      +ReceiveAttack(int power)
-      +Cure()
-    }
-
-    %% Clase Knight
-    class Knight{
-      +string Name
-      +Sword Sword
-      +Shield Shield
-      +Armor Armor
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Knight(string name)
-      +ReceiveAttack(int power)
-      +Cure()
-    }
-
-    %% Clase Archer
-    class Archer{
-      +string Name
-      +Bow Bow
-      +Helmet Helmet
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Archer(string name)
-      +ReceiveAttack(int power)
-      +Cure()
-    }
-
-    %% Clase SpellsBook
-    class SpellsBook{
-      ICollection<Spell> Spells
-      +int AttackValue
-      +int DefenseValue
-    }
-
-    %% Clase Spell
-    class Spell{
-      +int AttackValue
-      +int DefenseValue
-    }
-
-    %% Armas
-    class Axe{
-      +int AttackValue
-    }
-
-    class Sword{
-      +int AttackValue
-    }
-
-    class Bow{
-      +int AttackValue
-    }
-
-    class Staff{
-      +int AttackValue
-      +int DefenseValue
-    }
-
-    %% Defensas
-    class Shield{
-      +int DefenseValue
-    }
-
-    class Armor{
-      +int DefenseValue
-    }
-
-    class Helmet{
-      +int DefenseValue
-    }
-```
