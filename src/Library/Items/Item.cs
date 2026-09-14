@@ -4,7 +4,7 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Ucu.Poo.RolePlayGame
+namespace Library.Items
 {
     /// <summary>
     /// Representa un elemento o equipamiento del juego.
