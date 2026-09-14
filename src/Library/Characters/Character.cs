@@ -1,6 +1,6 @@
 namespace Ucu.Poo.RolePlayGame
 {
-public class Character
+    public class Character
 {
     // Atributos / Propiedades públicas (+ en UML)
     public string Name { get; set; }
