@@ -3,8 +3,7 @@
 //     Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 //--------------------------------------------------------------------------------
-
-namespace Library.Items.RolePlayGame
+namespace Library.Items
 {
     /// <summary>
     /// Representa un elemento o equipamiento del juego.
