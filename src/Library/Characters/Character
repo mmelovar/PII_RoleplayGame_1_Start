@@ -1,0 +1,22 @@
+namespace Library.Characters;
+
+public abstract class Character
+{
+    public string Name { get; set; }
+    public int AttackValue { get; set; }
+    public int DefenseValue { get; set; }
+    public int Health { get; set; }
+
+    protected Character(string name, int health, int attackValue, int defenseValue)
+    {
+        Name = name;
+        Health = health;
+        AttackValue = attackValue;
+        DefenseValue = defenseValue;
+    }
+
+    public abstract void Attack(Character target);
+    public abstract void ReceiveAttack(int power);
+    public abstract void Cure(int points);
+    public abstract void DisplayStats();
+}
