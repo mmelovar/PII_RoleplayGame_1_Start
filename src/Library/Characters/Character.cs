@@ -1,5 +1,5 @@
-namespace Library.Characters;
-
+namespace Ucu.Poo.RolePlayGame
+{
 public class Character
 {
     // Atributos / Propiedades públicas (+ en UML)
@@ -41,4 +41,5 @@ public class Character
     {
         return DefenseValue;
     }
+}
 }
