@@ -9,7 +9,7 @@ using System;
 namespace Library.Characters
 
 {
-     /// <summary>
+    /// <summary>
     /// Representa un personaje de tipo Enano (Dwarf).
     /// </summary>
     public class Dwarf : Character

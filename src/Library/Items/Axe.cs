@@ -5,6 +5,7 @@
 //--------------------------------------------------------------------------------
 
 using System;
+
 namespace Library.Items
 {
     /// <summary>
@@ -12,13 +13,12 @@ namespace Library.Items
     /// </summary>
     public class Axe : Item
     {
-    /// <summary>
-    /// Inicializa una nueva instancia de la clase <see cref="Axe"/>.
-    /// </summary>
-    /// <param name="name">El nombre del hacha.</param>
-    /// <param name="attackValue">El valor de ataque del hacha.</param>
-    /// <param name="defenseValue">El valor de defensa del hacha.</param>
-    
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="Axe"/>.
+        /// </summary>
+        /// <param name="name">El nombre del hacha.</param>
+        /// <param name="attackValue">El valor de ataque del hacha.</param>
+        /// <param name="defenseValue">El valor de defensa del hacha.</param>
         public Axe(string name, int attackValue, int defenseValue) : base("Axe", name, attackValue, defenseValue)
         {
         }

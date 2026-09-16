@@ -30,6 +30,7 @@ namespace Library.Characters
             this.AttackValue = attackValue;
             this.DefenseValue = defenseValue;
         }
+        
         /// <summary>
         /// Obtiene o establece el tipo o raza del personaje.
         /// </summary>
