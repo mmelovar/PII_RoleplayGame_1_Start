@@ -1,4 +1,12 @@
-namespace Ucu.Poo.RolePlayGame
+//--------------------------------------------------------------------------------
+// <copyright file="Character.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//--------------------------------------------------------------------------------
+
+using System;
+
+namespace Library.Characters
 {
 public abstract class Character
 {
@@ -26,7 +34,14 @@ public abstract class Character
             return;
         }
 
-        Health -= power;
+        int damage = power - GetDefenseValue();
+        
+        if (damage <= 0)
+        {
+            return;
+        }
+
+        Health -= damage;
 
         if (Health < 0)
         {
@@ -49,10 +64,24 @@ public abstract class Character
         Health += points;
     }
 
-    public virtual void Attack(string name)
-    {
-        // Lógica para atacar a un objetivo por nombre
-    }
+    /// <summary>
+    /// Realiza un ataque contra otro personaje objetivo.
+    /// </summary>
+    /// <param name="target">El personaje que recibirá el ataque.</param>
+    public virtual void Attack(Character target)
+        {
+            if (target == null) 
+            {
+                ArgumentNullException.ThrowIfNull(target);
+            }
+
+            if (this.Health <= 0) 
+            {
+                return; // Un personaje derrotado no puede atacar
+            }
+
+            target.ReceiveAttack(this.GetAttackValue());
+        }
     public abstract int GetAttackValue();
     public abstract int GetDefenseValue();
 }

@@ -1,12 +1,10 @@
-namespace Ucu.Poo.RolePlayGame
+namespace Library.Items
 {
     public class Helmet : Item
     {
         public Helmet(string name, int attackValue, int defenseValue)
+            : base(name, attackValue, defenseValue)
         {
-            Name = name;
-            AttackValue = attackValue;
-            DefenseValue = defenseValue;
         }
     }
 }

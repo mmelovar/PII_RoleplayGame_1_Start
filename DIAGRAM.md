@@ -1,108 +1,114 @@
 ```mermaid
-
 classDiagram
     class Character {
         +string Name
-        +int AttackValue
-        +int DefenseValue
         +int Health
-        +Character(type, name, health, attackvalue, defensevalue)
-        +ReceiveAttack(int power)
-        +Cure(int points)
-        +Attack(string name)
-        +GetAttackValue()
-        +GetDefenseValue()
-    }
-
-    class Wizard {
-        +SpellsBook SpellsBook
-        +Staff Staff
-        +SetItem(Item Item)
-        +DropItem(Item Item)
+        +int MaxHealth
+        +int BaseAttack
+        +int BaseDefense
+        +Character(string name, int health, int baseAttack, int baseDefense)
+        +void ReceiveAttack(int power)
+        +void Cure(int points)
+        +void Attack(Character target)
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
     class Dwarf {
         +Axe Axe
         +Shield Shield
-        +Helmet Helmet
         +Bow Bow
-        +SetItem(Item Item)
-        +DropItem(Item Item)
+        +Helmet Helmet
+        +void EquipAxe(Axe axe)
+        +void EquipShield(Shield shield)
+        +void EquipBow(Bow bow)
+        +void EquipHelmet(Helmet helmet)
+        +void UnequipAxe()
+        +void UnequipShield()
+        +void UnequipBow()
+        +void UnequipHelmet()
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    class Elve {
+    class Elf {
         +Sword Sword
         +Bow Bow
         +Armor Armor
         +Helmet Helmet
-        +SetItem(Item Item)
-        +DropItem(Item Item)
+        +void EquipSword(Sword sword)
+        +void EquipBow(Bow bow)
+        +void EquipArmor(Armor armor)
+        +void EquipHelmet(Helmet helmet)
+        +void UnequipSword()
+        +void UnequipBow()
+        +void UnequipArmor()
+        +void UnequipHelmet()
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    class SpellsBook {
-        ICollection~Spell~ Spell
-        +AddSpell(Spell spell)
-    }
-
-    class Staff {
-    }
-
-    class Spell {
-    }
-
-    class Axe {
-    }
-
-    class Shield {
-    }
-
-    class Helmet {
-    }
-
-    class Bow {
-    }
-
-    class Sword {
-    }
-
-    class Armor {
+    class Wizard {
+        +Staff Staff
+        +SpellBook SpellBook
+        +void EquipStaff(Staff staff)
+        +void UnequipStaff()
+        +void AddSpell(Spell spell)
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
     class Item {
+        <<abstract>>
         +string Name
         +int AttackValue
         +int DefenseValue
-        +Item(type, name, attackvalue, defensevalue)
+        #Item(string name, int attackValue, int defenseValue)
     }
 
-    %% Herencia (Generalización)
-    Character <|-- Wizard : es
-    Character <|-- Dwarf : es
-    Character <|-- Elve : es
+    class Axe
+    class Shield
+    class Bow
+    class Helmet
+    class Sword
+    class Armor
+    class Staff
 
-    Axe --|> Item : es
-    Shield --|> Item : es
-    Helmet --|> Item : es
-    Bow --|> Item : es
-    Sword --|> Item : es
-    Armor --|> Item : es
-    Staff --|> Item : es
-    SpellsBook --|> Item : es
-    Spell --|> Item : es
+    class SpellBook {
+        +List~Spell~ Spells
+        +void AddSpell(Spell spell)
+    }
 
-    %% Asociaciones / Composiciones de Equipamiento
-    Wizard --> SpellsBook
+    class Spell {
+        +string Name
+        +int AttackValue
+        +int DefenseValue
+    }
+
+    Character <|-- Dwarf
+    Character <|-- Elf
+    Character <|-- Wizard
+
+    Item <|-- Axe
+    Item <|-- Shield
+    Item <|-- Bow
+    Item <|-- Helmet
+    Item <|-- Sword
+    Item <|-- Armor
+    Item <|-- Staff
+    Item <|-- SpellBook
+
+    Dwarf --> Axe
+    Dwarf --> Shield
+    Dwarf --> Bow
+    Dwarf --> Helmet
+
+    Elf --> Sword
+    Elf --> Bow
+    Elf --> Armor
+    Elf --> Helmet
+
     Wizard --> Staff
-
-    Dwarf --> Axe : tiene
-    Dwarf --> Shield : tiene
-    Dwarf --> Helmet : tiene
-    Dwarf --> Bow : tiene
-
-    Elve --> Sword :tiene
-    Elve --> Bow : tiene
-    Elve --> Armor : tiene
-    Elve --> Helmet : tiene
-
-    %% Relación entre SpellsBook y Spell
-    SpellsBook "1" --> "*" Spell : contiene
+    Wizard --> SpellBook
+    SpellBook "1" --> "*" Spell : contains
+```

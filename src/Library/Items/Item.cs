@@ -4,17 +4,13 @@
 // </copyright>
 //--------------------------------------------------------------------------------
 
-namespace Ucu.Poo.RolePlayGame
+namespace Library.Items
 {
     /// <summary>
     /// Representa un elemento o equipamiento del juego.
     /// </summary>
     public abstract class Item
     {
-        /// <summary>
-        /// Obtiene o establece el tipo del elemento.
-        /// </summary>
-        public string Type { get; set; }
 
         /// <summary>
         /// Obtiene o establece el nombre del elemento.
@@ -30,5 +26,12 @@ namespace Ucu.Poo.RolePlayGame
         /// Obtiene o establece el valor de defensa del elemento.
         /// </summary>
         public int DefenseValue { get; protected set; }
+
+        protected Item(string name, int attackValue, int defenseValue)
+        {
+            Name = name;
+            AttackValue = attackValue;
+            DefenseValue = defenseValue;
+        }
     }
 }
