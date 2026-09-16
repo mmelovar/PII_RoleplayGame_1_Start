@@ -11,20 +11,10 @@ namespace Library.Items
     /// </summary>
     public abstract class Item
     {
-
-        /// <summary>
-        /// Obtiene o establece el nombre del elemento.
-        /// </summary>
         public string Name { get; protected set; }
 
-        /// <summary>
-        /// Obtiene o establece el valor de ataque del elemento.
-        /// </summary>
         public int AttackValue { get; protected set; }
 
-        /// <summary>
-        /// Obtiene o establece el valor de defensa del elemento.
-        /// </summary>
         public int DefenseValue { get; protected set; }
 
         protected Item(string name, int attackValue, int defenseValue)

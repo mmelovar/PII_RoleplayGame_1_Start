@@ -50,10 +50,10 @@ classDiagram
 
     class Wizard {
         +Staff Staff
-        +SpellBook SpellBook
-        +void EquipStaff(Staff staff)
-        +void UnequipStaff()
-        +void AddSpell(Spell spell)
+        +SpellsBook SpellsBook
+        +void SetItem(Item item)
+        +void GetItem(Item item)
+        +void DropItem(Item item)
         +int GetAttackValue()
         +int GetDefenseValue()
     }
@@ -74,9 +74,10 @@ classDiagram
     class Armor
     class Staff
 
-    class SpellBook {
+    class SpellsBook {
         +List~Spell~ Spells
         +void AddSpell(Spell spell)
+        +void RemoveSpell(Spell spell)
     }
 
     class Spell {
@@ -96,7 +97,7 @@ classDiagram
     Item <|-- Sword
     Item <|-- Armor
     Item <|-- Staff
-    Item <|-- SpellBook
+    Item <|-- SpellsBook
 
     Dwarf --> Axe
     Dwarf --> Shield
@@ -109,6 +110,6 @@ classDiagram
     Elf --> Helmet
 
     Wizard --> Staff
-    Wizard --> SpellBook
-    SpellBook "1" --> "*" Spell : contains
+    Wizard --> SpellsBook
+    SpellsBook "1" --> "*" Spell : contains
 ```

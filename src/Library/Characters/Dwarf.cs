@@ -3,36 +3,27 @@
 //     Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 //--------------------------------------------------------------------------------
+
 using System;
 using Library.Items;
 
 namespace Library.Characters
-
 {
     /// <summary>
     /// Representa un personaje de tipo Enano (Dwarf).
     /// </summary>
     public class Dwarf : Character
     {
-        /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="Dwarf"/>.
-        /// </summary>
-        /// <param name="name">El nombre del enano.</param>
-        /// <param name="health">La vida del enano.</param>
-        /// <param name="baseAttack">El valor de ataque base del enano.</param>
-        /// <param name="baseDefense">El valor de defensa base del enano.</param>
         public Dwarf(string name, int health, int baseAttack, int baseDefense)
             : base(name, health, baseAttack, baseDefense)
         {
         }
-        
-        
+
         public Axe Axe { get; protected set; }
         public Shield Shield { get; protected set; }
         public Bow Bow { get; protected set; }
         public Helmet Helmet { get; protected set; }
 
-        
         public override int GetAttackValue()
         {
             int total = BaseAttack;
@@ -73,6 +64,7 @@ namespace Library.Characters
             {
                 throw new ArgumentNullException(nameof(axe), "El hacha no puede ser nula.");
             }
+
             Axe = axe;
         }
 
@@ -82,6 +74,7 @@ namespace Library.Characters
             {
                 throw new ArgumentNullException(nameof(shield), "El escudo no puede ser nulo.");
             }
+
             Shield = shield;
         }
 
@@ -91,8 +84,9 @@ namespace Library.Characters
             {
                 throw new ArgumentNullException(nameof(bow), "El arco no puede ser nulo.");
             }
+
             Bow = bow;
-        } 
+        }
 
         public void EquipHelmet(Helmet helmet)
         {
@@ -100,6 +94,7 @@ namespace Library.Characters
             {
                 throw new ArgumentNullException(nameof(helmet), "El casco no puede ser nulo.");
             }
+
             Helmet = helmet;
         }
 
@@ -107,17 +102,82 @@ namespace Library.Characters
         {
             Axe = null;
         }
+
         public void UnequipShield()
         {
             Shield = null;
         }
+
         public void UnequipBow()
         {
             Bow = null;
         }
+
         public void UnequipHelmet()
         {
             Helmet = null;
         }
-}
+
+        public void GetItem(Item item)
+        {
+            Axe axe = item as Axe;
+            if (axe != null)
+            {
+                EquipAxe(axe);
+                return;
+            }
+
+            Shield shield = item as Shield;
+            if (shield != null)
+            {
+                EquipShield(shield);
+                return;
+            }
+
+            Bow bow = item as Bow;
+            if (bow != null)
+            {
+                EquipBow(bow);
+                return;
+            }
+
+            Helmet helmet = item as Helmet;
+            if (helmet != null)
+            {
+                EquipHelmet(helmet);
+                return;
+            }
+
+            throw new ArgumentException("El enano solo puede equipar Axe, Shield, Bow o Helmet.", nameof(item));
+        }
+
+        public void DropItem(Item item)
+        {
+            if (item is Axe)
+            {
+                Axe = null;
+                return;
+            }
+
+            if (item is Shield)
+            {
+                Shield = null;
+                return;
+            }
+
+            if (item is Bow)
+            {
+                Bow = null;
+                return;
+            }
+
+            if (item is Helmet)
+            {
+                Helmet = null;
+                return;
+            }
+
+            throw new ArgumentException("El enano solo puede desequipar Axe, Shield, Bow o Helmet.", nameof(item));
+        }
+    }
 }
