@@ -1,129 +1,134 @@
-# Diagrama de clases
-
-Completa a continuación tu diagrama de clases usando
-[Mermaid](https://mermaid.live/edit). Debes completar el diagrama agregando las
-clases y sus atributos, operaciones y relaciones faltantes. La ventaja de usar
-**Mermaid** es que el diagrama es simplemente texto en un archivo
-[Markdown](https://www.markdownguide.org) como este, y no gráficos ni imágenes.
-
 ```mermaid
-classDiagram
-    %% Relaciones de Wizard
-    Wizard "1" --> "1" SpellsBook : has
-    Wizard "1" --> "1" Staff : has
+classDiagram 
 
-    %% Relaciones de Dwarf
-    Dwarf "1" --> "1" Axe : has
-    Dwarf "1" --> "1" Shield : has
-    Dwarf "1" --> "1" Helmet : has
-
-    %% Relaciones de Knight
-    Knight "1" --> "1" Sword : has
-    Knight "1" --> "1" Shield : has
-    Knight "1" --> "1" Armor : has
-
-    %% Relaciones de Archer
-    Archer "1" --> "1" Bow : has
-    Archer "1" --> "1" Helmet : has
-
-    %% Relación de SpellsBook con Spell
-    SpellsBook "1" --> "*" Spell : contiene
-
-    %% Clase Wizard
-    class Wizard{
-      +string Name
-      +SpellsBook SpellsBook
-      +Staff Staff
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Wizard(string name)
-      +ReceiveAttack(int power)
-      +Cure()
+    class Character {
+        +string Name
+        +int Health
+        +int MaxHealth
+        +int BaseAttack
+        +int BaseDefense
+        +Character(string name, int health, int baseAttack, int baseDefense)
+        +void ReceiveAttack(int power)
+        +void Cure(int points)
+        +void Attack(Character target)
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    %% Clase Dwarf
-    class Dwarf{
-      +string Name
-      +Axe Axe
-      +Shield Shield
-      +Helmet Helmet
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Dwarf(string name)
-      +ReceiveAttack(int power)
-      +Cure()
+    class Item {}
+
+    class Dwarf {
+        +Axe Axe
+        +Shield Shield
+        +Bow Bow
+        +Helmet Helmet
+        +void EquipAxe(Axe axe)
+        +void EquipShield(Shield shield)
+        +void EquipBow(Bow bow)
+        +void EquipHelmet(Helmet helmet)
+        +void UnequipAxe()
+        +void UnequipShield()
+        +void UnequipBow()
+        +void UnequipHelmet()
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    %% Clase Knight
-    class Knight{
-      +string Name
-      +Sword Sword
-      +Shield Shield
-      +Armor Armor
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Knight(string name)
-      +ReceiveAttack(int power)
-      +Cure()
+    class Elf {
+        +Sword Sword
+        +Bow Bow
+        +Armor Armor
+        +Helmet Helmet
+        +void EquipSword(Sword sword)
+        +void EquipBow(Bow bow)
+        +void EquipArmor(Armor armor)
+        +void EquipHelmet(Helmet helmet)
+        +void UnequipSword()
+        +void UnequipBow()
+        +void UnequipArmor()
+        +void UnequipHelmet()
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    %% Clase Archer
-    class Archer{
-      +string Name
-      +Bow Bow
-      +Helmet Helmet
-      +int AttackValue
-      +int DefenseValue
-      +int Health
-      +Archer(string name)
-      +ReceiveAttack(int power)
-      +Cure()
+    class Wizard {
+        +Staff Staff
+        +SpellsBook SpellsBook
+        +void SetItem(Item item)
+        +void GetItem(Item item)
+        +void DropItem(Item item)
+        +int GetAttackValue()
+        +int GetDefenseValue()
     }
 
-    %% Clase SpellsBook
-    class SpellsBook{
-      ICollection<Spell> Spells
-      +int AttackValue
-      +int DefenseValue
+    class AttackItem {
+        <<abstract>>
+        + string Name
+        + int AttackValue
+        #AttackItem(string name, int attackValue)
     }
 
-    %% Clase Spell
-    class Spell{
-      +int AttackValue
-      +int DefenseValue
+    class DefenseItem {
+        <<abstract>>
+        + string Name
+        + int DefenseValue
+        #DefenseItem(string name, int defenseValue)
     }
 
-    %% Armas
-    class Axe{
-      +int AttackValue
+    class AttackDefenseItem {
+        <<abstract>>
+        + string Name
+        + int AttackValue
+        + int DefenseValue
+        #AttackDefenseItem(string name, int attackValue, int defenseValue)
     }
 
-    class Sword{
-      +int AttackValue
+    class MagicalItem
+    class Axe
+    class Shield
+    class Bow
+    class Helmet
+    class Sword
+    class Armor
+    class Staff
+    class Spell
+
+    class SpellsBook {
+        +List~Spell~ Spells
+        +void AddSpell(Spell spell)
+        +void RemoveSpell(Spell spell)
     }
 
-    class Bow{
-      +int AttackValue
-    }
+    Character <|-- Dwarf
+    Character <|-- Elf
+    Character <|-- Wizard
 
-    class Staff{
-      +int AttackValue
-      +int DefenseValue
-    }
+    AttackItem --|> Item
+    DefenseItem --|> Item
+    AttackDefenseItem --|> Item
+    MagicalItem --|> AttackDefenseItem
 
-    %% Defensas
-    class Shield{
-      +int DefenseValue
-    }
+    Axe --|> AttackItem
+    Shield --|> DefenseItem
+    Bow --|> AttackItem
+    Helmet --|> DefenseItem
+    Sword --|> AttackItem
+    Armor --|> DefenseItem
+    Staff --|> MagicalItem
+    SpellsBook --|> MagicalItem
+    Spell --|> MagicalItem
 
-    class Armor{
-      +int DefenseValue
-    }
+    Dwarf --> Axe
+    Dwarf --> Shield
+    Dwarf --> Bow
+    Dwarf --> Helmet
 
-    class Helmet{
-      +int DefenseValue
-    }
+    Elf --> Sword
+    Elf --> Bow
+    Elf --> Armor
+    Elf --> Helmet
+
+    Wizard --> Staff
+    Wizard --> SpellsBook
+    SpellsBook o-- Spell
 ```
